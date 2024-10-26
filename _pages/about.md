@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am Sebastian, an undergraduate student at California State University, Bakersfield (CSUB), though I often go by my middle name: Tom. I am incredibly grateful to be advised by Prof. Anjana Yatawara. I am principally interested in designing next-generation GPU architecture and pushing the boundaries for computational power and energy efficiency. I am also interested in machine learning and training acceleration. 
+Hi! I am Sebastian (but I prefer my middle name: Tom), an undergraduate student at California State University, Bakersfield (CSUB). I am incredibly grateful to be advised by Prof. Anjana Yatawara. I am principally interested in designing next-generation GPU architecture and pushing the boundaries for computational power and energy efficiency. I am also interested in machine learning and training acceleration. 
 
 My research experience started over the past year, and can be attributed to the widespread encouragement of friends, family, and faculty. My latest project involved modeling trends of air pollution-related disease as part of UC Merced's CV PATH experience. Currently, I am continuing undergraduate research under Prof. Yatawara, who has been an integral part of solidifying my ambition for a career in academia. My work is focused on integrating LSTM-based recurring neural networks into various GARCH models and evaluating their Influenza predictive performance against other models.
 
