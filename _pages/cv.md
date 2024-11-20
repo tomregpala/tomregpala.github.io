@@ -7,4 +7,4 @@ redirect_from:
   - /resume
 ---
 
-[Download my CV (PDF)]({{ site.baseurl }}/files/CV.pdf)
+<meta http-equiv="refresh" content="0; url={{ site.baseurl }}/files/CV.pdf">
