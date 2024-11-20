@@ -1,8 +1,10 @@
 ---
-layout: none
+layout: archive
+title: "CV"
 permalink: /cv/
+author_profile: true
 redirect_from:
   - /resume
 ---
 
-<meta http-equiv="refresh" content="0; url={% include base_path %}/files/CV.pdf">
+[Download my CV (PDF)]({{ site.baseurl }}/files/CV.pdf)
