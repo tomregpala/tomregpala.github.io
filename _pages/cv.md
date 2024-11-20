@@ -5,4 +5,4 @@ redirect_from:
   - /resume
 ---
 
-<meta http-equiv="refresh" content="0; url=files/CV.pdf">
+<meta http-equiv="refresh" content="0; url=/files/CV.pdf">
