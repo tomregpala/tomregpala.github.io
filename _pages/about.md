@@ -17,7 +17,9 @@ I also have three years of experience as an information technology assistant on 
 
 News and Timeline
 ======
-
+2025
+  - February: Acquired proficiency in programming in MIPS and ARM processors! Additionally, learned how to use KiCAD to design custom PCBs from schematics.
+  - January: Began prototyping phase of my Senior Project: Modular Pedalboard! Also picked up VHDL and Verilog using Intel Quartus Prime for FPGA programming.
 2024
   - October: Began work on integrating LSTM-based RNNs with multiple GARCH models for Influenza forecasting.
   - August: Began research and development of a modular guitar pedalboard as part of a senior project. Hired as a research assistant to continue research under Prof. Yatawara
