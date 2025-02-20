@@ -1,6 +1,6 @@
 ---
 title: "Senior Project: Modular Pedalboard"
-excerpt: "A guitar pedalboard consisting of modules that act as the power supply, signal input, signal output, and pedalboard platform. <br/><img src='/images/500x300.png'>"
+excerpt: "A guitar pedalboard consisting of modules that act as the power supply, signal input, signal output, and pedalboard platform. <br/><img src='/images/PedalPCB3D.png'>"
 collection: portfolio
 ---
 
