@@ -11,7 +11,8 @@ Hi! I am Sebastian, but I prefer my middle name, Tom. Currently, I am finishing 
 
 My research experience started over the past year, and can be attributed to the widespread encouragement of friends, family, and faculty. My latest project involved modeling trends of air pollution-related disease as part of UC Merced's CV PATH experience. Currently, I am continuing undergraduate research under Prof. Yatawara, who has been an integral part of solidifying my ambition for a career in academia. My work is focused on integrating LSTM-based recurring neural networks into various GARCH models and evaluating their Influenza predictive performance against other models.
 
-I am collaborating with colleague Martin Caballero on developing a modular guitar pedalboard as part of a senior capstone project.
+I am collaborating with colleague Martin Caballero on developing a modular guitar pedalboard as part of a senior capstone project. Here's a PCB I designed for a distortion pedal with a noise gate!
+
 ![Alt text](images/PedalPCB.png)
 ![Alt text](images/PedalPCB3D.png)
 
