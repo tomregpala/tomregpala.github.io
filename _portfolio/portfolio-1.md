@@ -10,4 +10,4 @@ For a prototype, the modules will support industry standard pedals. This means t
 
 
 <img src="/images/PedalPCB.png" alt="My Photo" width="300" />
-<img src="/images/PedalPCB3D.png" alt="My Photo" width="300" />
+<img src="/images/PedalPCB3D.png" alt="My Photo" width="500" />
