@@ -8,5 +8,6 @@ As part of a capstone senior project in my undergraduate studies, I am working a
 
 For a prototype, the modules will support industry standard pedals. This means they will be sized to fit 1590B enclosure measurements, provide 9V center-negative polarity DC power. As part of the project, I am building a distortion pedal that represents an ideal standard:
 
- ![Alt text](images/PedalPCB.png)
- ![Alt text](images/PedalPCB3D.png)
+
+<img src="/images/PedalPCB.png" alt="My Photo" width="300" />
+<img src="/images/PedalPCB3D.png" alt="My Photo" width="300" />
