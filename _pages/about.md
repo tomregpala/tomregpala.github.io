@@ -13,11 +13,6 @@ My research experience started over the past year, and can be attributed to the 
 
 I am collaborating with colleague Martin Caballero on developing a modular guitar pedalboard as part of a senior capstone project. Here's a PCB I designed for a distortion pedal with a noise gate!
 
-![Alt text](images/PedalPCB.png)
-![Alt text](images/PedalPCB3D.png)
-
-
-
 I also have three years of experience as an information technology assistant on my campus, where I honed my skills in work documentation, collaboration, enterprise networking, and vulnerability remediation. 
 
 News and Timeline
