@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A board that didn't work — Tom Regpala</title>
+<meta name="description" content="A two-layer distortion pedal PCB that failed on first fabrication, and the four design faults that explain why.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="masthead">
+  <a class="mark" href="index.html">Tom Regpala</a>
+  <nav class="nav" aria-label="Main">
+    <a class="back" href="index.html">← Back</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="project-head">
+  <h1>A board that didn't work, and the four reasons why</h1>
+  <p class="byline">Solo project — CSU Bakersfield senior design</p>
+  <p class="venue">KiCad · two-layer PCB · Hammond 1590B</p>
+</div>
+
+<div class="prose">
+
+<h2>The brief</h2>
+
+<p>Almqvist and Nordberg's 2019 thesis describes a guitar distortion circuit with an unusual addition: a JFET noise gate driven by a level-sensing sidechain, which pinches off the signal path when the player isn't playing. High-gain distortion amplifies everything, including the hiss and hum between notes, and the gate is what suppresses it.</p>
+
+<p>Their circuit works. What it doesn't do is fit in a pedal. The published layout is bench-sized, and a guitarist needs something that drops into a Hammond 1590B — the enclosure most commercial stompboxes use — alongside four panel-mounted potentiometers, two jacks, and a footswitch.</p>
+
+<p><strong>The circuit is not mine.</strong> My contribution is the board: shrinking the layout to enclosure dimensions, arranging the I/O and control connections so the thing can actually be wired by hand, and carrying it through to fabrication outputs.</p>
+
+<table>
+  <tbody>
+    <tr><td>Layers</td><td>2</td></tr>
+    <tr><td>Dimensions</td><td>86.5 × 54.5 mm</td></tr>
+    <tr><td>Enclosure</td><td>Hammond 1590B</td></tr>
+    <tr><td>Supply</td><td>9 V DC</td></tr>
+    <tr><td>Assembly</td><td>Mixed through-hole and SMD</td></tr>
+    <tr><td>Controls</td><td>Drive, tone, volume, gate threshold</td></tr>
+  </tbody>
+</table>
+
+<h2>The layout problem</h2>
+
+<p>Most of the work was mechanical rather than electrical. The board had to sit inside the enclosure without fouling the hardware, and the wiring harness had to be assemblable by a person with tweezers rather than a pick-and-place machine.</p>
+
+<p>The board outline follows the 1590B interior with clearance for its internal corner radii and the jack bodies. Mounting is jack-supported — the board hangs off the input and output jack hardware rather than standoffs, which is standard at this enclosure size and saves the vertical clearance standoffs would eat under the lid. Potentiometer pads run along one edge in the same left-to-right order as the panel, so the harness runs straight from board to controls without crossing. Input, output, and footswitch pads sit nearest their respective hardware to keep the bypass wiring short.</p>
+
+<h2>What happened</h2>
+
+<p>The fabricated and populated board did not function as a distortion pedal. Tone and volume passed signal. Neither the distortion stage nor the noise gate did anything.</p>
+
+<p>I traced it back through the schematic and netlist rather than leaving it as an unexplained failure. Four faults account for the behavior, and all four are mine — design-side errors, every one of which a more careful review would have caught before the board went out for fabrication.</p>
+
+<h3>1. Both TL061s powered backwards</h3>
+<p>U1 and U2 were placed with a vertical mirror, which swaps where pins 4 and 7 appear on screen. I wired the supply nets to match the picture instead of the pin names, so on both parts V− went to 9 V and V+ went to ground. That kills the sidechain and the virtual-ground rail together — the JFET gates never receive a control voltage and the bias rail is dead. This is the main reason the gate did nothing.</p>
+
+<h3>2. The RC4558's power unit was never placed</h3>
+<p>The library symbol splits the part into three units, and the third one carries the supply pins. I placed units A and B and not C, so pins 4 and 8 appear nowhere in the netlist and the drive and tone section reached the board with no supply routed to it at all.</p>
+
+<h3>3. Footprint mismatch across the JFET pairs</h3>
+<p>Q4, Q6, and Q8 are MMBFJ113 parts — the MMBF prefix means SOT-23 surface mount — but I assigned them the TO-92 through-hole footprint. Their counterparts Q3, Q5, and Q7 were correctly assigned SOT-23. The result is three surface-mount and three through-hole packages in what are supposed to be matched parallel pairs.</p>
+
+<h3>4. Four potentiometers with no values</h3>
+<p>Drive, tone, sensitivity, and level all still carried KiCad's default placeholder value. That leaves four unspecified line items in the BOM, but the electrical consequence is worse: drive gain is 1 + (33k + R<sub>pot</sub>)/4.7k and sidechain gain is 1 + (22k + R<sub>pot</sub>)/1k, so both depend directly on numbers that were never fixed.</p>
+
+<div class="callout">
+  <p>Three of the four — reversed supplies, the missing power unit, the unset values — are exactly what an electrical rules check exists to catch. I skipped it, and it cost a board spin.</p>
+</div>
+
+<h2>What changes in rev 2</h2>
+
+<p>Beyond fixing the faults themselves, the process needs to change more than the design does.</p>
+
+<p>Run a full ERC and a manual pin-by-pin supply check before generating any fabrication output. Verify every footprint against its datasheet rather than against the part name — the MMBF prefix distinction is obvious in hindsight and invisible at speed. Standardize on surface mount throughout instead of inheriting the reference design's mixed assembly, which would shrink the board further and eliminate the package-mismatch failure mode entirely.</p>
+
+<p>Two additions would have changed the debugging experience specifically. Test points on the virtual-ground rail, both op-amp supply rails, and the sidechain control voltage would have turned the supply fault into a two-minute measurement instead of schematic archaeology. And silkscreen polarity markings on the op-amps would make a mirrored placement visible during assembly, before anything is soldered.</p>
+
+<h2>Credits</h2>
+
+<p>Original circuit design by Tobias Almqvist and David Nordberg, <em>Noise-free distortion pedal for electric guitars</em>, 2019. PCB layout, enclosure adaptation, and fabrication outputs are mine.</p>
+
+<p><a href="https://github.com/tomregpala/seniorProj-distortion-pedal">KiCad project, schematic, BOM, and gerbers</a> · <a href="files/Senior_Project_Final_Report.pdf">Full technical report</a></p>
+
+</div>
+
+</main>
+
+<footer>
+  <span><a href="index.html">Tom Regpala</a></span>
+  <span>Built by hand. No template.</span>
+</footer>
+
+</div>
+
+</body>
+</html>

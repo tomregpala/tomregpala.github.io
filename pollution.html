@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What a straight line hides — Tom Regpala</title>
+<meta name="description" content="Two new diagnostics for air pollution exposure inequality, and evidence that EPA monitor placement reverses the measured pollution–income trend.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="masthead">
+  <a class="mark" href="index.html">Tom Regpala</a>
+  <nav class="nav" aria-label="Main">
+    <a class="back" href="index.html">← Back</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="project-head">
+  <h1>What a straight line hides</h1>
+  <p class="byline">Tom Regpala, Edgar Palafox, Anjana Yatawara</p>
+  <p class="venue">Atmospheric Environment: X, 2026 · 24 years · four pollutants</p>
+</div>
+
+<div class="prose">
+
+<h2>The standard tool, and what it discards</h2>
+
+<p>The usual way to measure whether pollution falls harder on poorer people is the slope index of inequality: sort the population by income, fit a line through exposure, and report the slope. One number, easy to compare across states and years.</p>
+
+<p>A line assumes the relationship is monotone. If exposure rises steadily as income falls, the slope captures it. But if the middle of the distribution sits well off the line — if middle-income counties are dirtier than both ends, or cleaner — the slope averages that away and reports a number that describes no actual population. The structure isn't in the residual noise. It's real, and the metric is blind to it.</p>
+
+<p>We introduced two dimensionless diagnostics to recover it.</p>
+
+<h3>Middle-Group Residual</h3>
+<p>The signed residual of the middle-income stratum from the slope-index fit, on a three-stratum partition splitting the population 30/40/30. It measures how far the middle sits off the line and in which direction. There's a tidy result underneath it: the residual sum of squares of the slope-index fit is determined entirely by MGR², which means the diagnostic isn't an arbitrary add-on but the exact quantity the linear fit throws away. It generalizes to four- and five-stratum partitions through a mean absolute interior residual.</p>
+
+<h3>Within-Stratum Slope Heterogeneity</h3>
+<p>The standard deviation of income–exposure correlations computed <em>within</em> each stratum, normalized to the unit interval. Between-group metrics compare strata to each other and are structurally incapable of seeing what happens inside one. WSSH catches the case where the gradient runs one direction in the bottom stratum and the opposite direction in the top — a sign flip that leaves the aggregate slope looking unremarkable.</p>
+
+<h2>The measurement problem</h2>
+
+<p>Any study like this inherits a sampling problem that is rarely stated plainly: the EPA does not monitor everywhere. Regulatory monitors sit where regulation requires them, which is not a random sample of where people live. Counties without monitors are simply absent from most analyses.</p>
+
+<p>For PM2.5 we closed that gap with a hybrid panel — monitor measurements where they exist, and population-weighted satellite-derived estimates from the WUSTL Atmospheric Composition Analysis Group product everywhere else. That extends coverage to 44 contiguous states. The other three criteria pollutants have no comparable satellite product, so NO₂, O₃, and SO₂ run on monitor-equipped county panels covering 17, 36, and 22 states respectively.</p>
+
+<h2>The result that matters</h2>
+
+<div class="callout">
+  <p>Restricting the analysis to monitored counties doesn't just shrink the sample. It reverses the direction of the measured pollution–income trend relative to the full population.</p>
+</div>
+
+<p>This is the finding with consequences beyond the paper. It means a body of work resting on monitor-only panels may be reporting a gradient with the wrong sign — not merely an imprecise estimate, but an inverted one. And because the reversal comes from where monitors are placed rather than from any modeling choice, it isn't fixable by better statistics on the same data.</p>
+
+<p>Alongside the two new diagnostics we computed six established between-stratum measures — the slope and relative indices of inequality, the relative concentration index, between-group variance, the Theil index, and mean log deviation — with bootstrapped confidence intervals, and fit cross-state temporal trends using Newey-West standard errors to handle serial correlation across the 24-year panel.</p>
+
+<h2>Limits</h2>
+
+<p>Worth being straight about what this doesn't establish. County-level aggregation hides within-county variation, and pollution gradients can be sharp at neighborhood scale. Median household income is a coarse proxy for the economic position of any individual. And the satellite product is itself a model, calibrated against the same monitor network whose coverage we're arguing is biased — a circularity that constrains how hard the hybrid panel can be pushed.</p>
+
+<h2>Code</h2>
+
+<p>I built the analysis pipeline in R. The version of record accompanying the paper is a Python implementation maintained by Anjana Yatawara, which reproduces the manuscript panels exactly from committed derived data.</p>
+
+<p><a href="https://doi.org/10.1016/j.aeaoa.2026.100492">Paper (open access, CC BY 4.0)</a> · <a href="https://github.com/tomregpala/Yatawara-Exposure-Inequity-Gradient">My R pipeline</a> · <a href="https://github.com/anjana-yatawara/air-pollution-exposure-inequality">Published code and data</a></p>
+
+</div>
+
+</main>
+
+<footer>
+  <span><a href="index.html">Tom Regpala</a></span>
+  <span>Built by hand. No template.</span>
+</footer>
+
+</div>
+
+</body>
+</html>
