@@ -86,7 +86,8 @@
       <div class="links">
         <a href="https://doi.org/10.1016/j.aeaoa.2026.100492">Read the paper</a>
         <a href="files/Published_Paper.pdf">PDF</a>
-        <a href="https://github.com/anjana-yatawara/air-pollution-exposure-inequality">Code and data</a>
+        <a href="https://github.com/tomregpala/Yatawara-Exposure-Inequity-Gradient">My R pipeline</a>
+        <a href="https://github.com/anjana-yatawara/air-pollution-exposure-inequality">Published code</a>
       </div>
     </div>
     <div class="aside">
@@ -98,9 +99,10 @@
 
   <article class="row">
     <div>
-      <h3>Modular pedalboard with a noise-free distortion pedal</h3>
-      <p>A 63-component, two-layer distortion PCB designed in KiCad around dual TL061 and RC4558 op-amps, with an experimental JFET noise-filter stage to suppress hiss in the analog signal path. Prototyped in LiveSPICE, then hand-assembled — through-hole passives, eight discrete transistors, a seven-diode clipping network, and SOT-23 surface-mount JFETs — and verified by oscilloscope. The surrounding controller handles power and signal routing for any pedal in a standard 1590B enclosure.</p>
+      <h3>Fitting a noise-gated distortion circuit into a 1590B</h3>
+      <p>A two-layer PCB implementation of a JFET-gated guitar distortion circuit from Almqvist and Nordberg's 2019 thesis, reworked from a bench-sized layout into the 86.5 × 54.5 mm footprint of a standard stompbox enclosure — jack-supported mounting, pot connections ordered to match the panel so the harness runs straight. The populated board didn't work: tone and volume passed signal, distortion and gate didn't. I traced it to four design-side faults, including reversed supply pins on both TL061s from a mirrored symbol and an RC4558 power unit that was never placed, and documented each with its fix. The surrounding senior project also covered a modular controller for power and signal routing across a pedalboard.</p>
       <div class="links">
+        <a href="https://github.com/tomregpala/seniorProj-distortion-pedal">Repository</a>
         <a href="files/Senior_Project_Final_Report.pdf">Technical report</a>
       </div>
     </div>
@@ -118,9 +120,6 @@
   </div>
   <p class="citation">
     Regpala, T., Palafox, E., &amp; Yatawara, A. (2026). Air pollution exposure inequality across U.S. income and racial groups, 2000–2023: A hybrid monitor–satellite analysis with two new shape diagnostics. <em>Atmospheric Environment: X, 31</em>, 100492. <a href="https://doi.org/10.1016/j.aeaoa.2026.100492">doi.org/10.1016/j.aeaoa.2026.100492</a>
-  </p>
-  <p class="citation" style="margin-top:16px;">
-    Regpala, T., Ramos, J., &amp; Malek, A. An introductory survey of transformers and adversarial machine learning. Submitted to <em>Journal of Network and Computer Applications</em>, September 2025. <span style="color:var(--ink-3)">Under review.</span>
   </p>
 </section>
 
