@@ -68,7 +68,9 @@
 
 <h2>Code</h2>
 
-<p>I built the analysis pipeline in R. The version of record accompanying the paper is a Python implementation maintained by Anjana Yatawara, which reproduces the manuscript panels exactly from committed derived data.</p>
+<p>I built the analysis pipeline in R — a reproducible workflow that pulls the EPA data, assembles income, population, state, and county records into a single panel, and generates figures and result tables for every state. It also writes diagnostic tables at each stage, flagging missing county records, gaps in the historical series, and counties that failed to match across sources, which is where a join across 24 years and several thousand counties tends to fail silently.</p>
+
+<p>The version of record accompanying the paper is a Python implementation maintained by Anjana Yatawara, which reproduces the manuscript panels exactly from committed derived data.</p>
 
 <p><a href="https://doi.org/10.1016/j.aeaoa.2026.100492">Paper (open access, CC BY 4.0)</a> · <a href="https://github.com/tomregpala/Yatawara-Exposure-Inequity-Gradient">My R pipeline</a> · <a href="https://github.com/anjana-yatawara/air-pollution-exposure-inequality">Published code and data</a></p>
 
