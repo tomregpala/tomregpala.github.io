@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tom Regpala — Computer Engineer</title>
+<meta name="description" content="Computer engineer working across GPU security, large-scale measurement, and analog hardware. Published in Atmospheric Environment: X.">
+
+<meta property="og:title" content="Tom Regpala — Computer Engineer">
+<meta property="og:description" content="GPU security, large-scale measurement, and analog hardware.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tomregpala.github.io">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="masthead">
+  <a class="mark" href="/">Tom Regpala</a>
+  <nav class="nav" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+    <a href="/files/tom-regpala-cv.pdf">CV</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="hero">
+  <h1>Computer<br>engineer.</h1>
+  <p class="lede">I work on <strong>GPU security</strong>, <strong>large-scale measurement</strong>, and <strong>analog hardware</strong> — from CUDA-side defenses against model-extraction attacks down to the solder joints on a two-layer board.</p>
+
+  <dl class="spec">
+    <div>
+      <dt>Based in</dt>
+      <dd>Bakersfield, California</dd>
+    </div>
+    <div>
+      <dt>Education</dt>
+      <dd>B.S. Computer Engineering, CSU Bakersfield</dd>
+    </div>
+    <div>
+      <dt>Published</dt>
+      <dd><a href="#publication">Atmospheric Environment: X</a>, 2026</dd>
+    </div>
+    <div>
+      <dt>Looking for</dt>
+      <dd>Systems and hardware roles, PhD positions</dd>
+    </div>
+  </dl>
+</div>
+
+<section id="work">
+  <div class="section-head">
+    <h2>Selected work</h2>
+    <p>Three projects that cover the range</p>
+  </div>
+
+  <article class="row">
+    <div>
+      <h3>Hiding a transformer from its own GPU</h3>
+      <p>The Decepticon attack (IISWC 2023) steals a model's architecture by fingerprinting GPU kernel execution — a trace fine-tuned models inherit from their pre-trained parent. We recreated the attack and built two CUDA-side defenses against it. Constant-load padding cuts the attack's identification rate from 95% to under 10% but costs a 6.6× slowdown; jitter scheduling costs 33% overhead and still cuts it to 61%. Together they bracket a security-performance tradeoff rather than closing it.</p>
+      <div class="links">
+        <a href="auto-bots.html">Read the write-up</a>
+      </div>
+    </div>
+    <div class="aside">
+      <span>CUDA, GPU security</span>
+      <span>2024–2025</span>
+      <span>CSUB research</span>
+    </div>
+  </article>
+
+  <article class="row">
+    <div>
+      <span class="flag">Peer-reviewed</span>
+      <h3>Air pollution exposure inequality across U.S. income and racial groups</h3>
+      <p>First-author study introducing two dimensionless diagnostics — the Middle-Group Residual and Within-Stratum Slope Heterogeneity — that recover structure the standard slope index of inequality discards. Built on 24 years of EPA monitor readings for four criteria pollutants, with PM2.5 extended across 44 states by fusing regulatory monitors with population-weighted satellite estimates. The analysis also shows that where the EPA places its sensors biases national estimates enough to reverse the direction of the measured pollution–income trend.</p>
+      <div class="links">
+        <a href="https://doi.org/10.1016/j.aeaoa.2026.100492">Read the paper</a>
+        <a href="https://github.com/anjana-yatawara/air-pollution-exposure-inequality">Code and data</a>
+      </div>
+    </div>
+    <div class="aside">
+      <span>R, RStudio</span>
+      <span>2024–2026</span>
+      <span>Atmos. Env: X</span>
+    </div>
+  </article>
+
+  <article class="row">
+    <div>
+      <h3>Modular pedalboard with a noise-free distortion pedal</h3>
+      <p>A 63-component, two-layer distortion PCB designed in KiCad around dual TL061 and RC4558 op-amps, with an experimental JFET noise-filter stage to suppress hiss in the analog signal path. Prototyped in LiveSPICE, then hand-assembled — through-hole passives, eight discrete transistors, a seven-diode clipping network, and SOT-23 surface-mount JFETs — and verified by oscilloscope. The surrounding controller handles power and signal routing for any pedal in a standard 1590B enclosure.</p>
+      <div class="links">
+        <a href="https://github.com/tomregpala">Source and schematics</a>
+      </div>
+    </div>
+    <div class="aside">
+      <span>KiCad, LiveSPICE</span>
+      <span>2024–2025</span>
+      <span>Senior design</span>
+    </div>
+  </article>
+</section>
+
+<section id="publication">
+  <div class="section-head">
+    <h2>Publication</h2>
+  </div>
+  <p class="citation">
+    Regpala, T., Palafox, E., &amp; Yatawara, A. (2026). Air pollution exposure inequality across U.S. income and racial groups, 2000–2023: A hybrid monitor–satellite analysis with two new shape diagnostics. <em>Atmospheric Environment: X, 31</em>, 100492. <a href="https://doi.org/10.1016/j.aeaoa.2026.100492">doi.org/10.1016/j.aeaoa.2026.100492</a>
+  </p>
+  <p class="citation" style="margin-top:16px;">
+    Regpala, T., Ramos, J., &amp; Malek, A. An introductory survey of transformers and adversarial machine learning. Submitted to <em>Journal of Network and Computer Applications</em>, September 2025. <span style="color:var(--ink-3)">Under review.</span>
+  </p>
+</section>
+
+<section id="experience">
+  <div class="section-head">
+    <h2>Experience</h2>
+  </div>
+
+  <article class="job">
+    <div>
+      <h3>Undergraduate research assistant</h3>
+      <p class="org">CSU Bakersfield</p>
+      <p>Ran the full analysis pipeline for the air quality study and implemented the CUDA extraction defenses. Presented the GPU benchmark results as an invited speaker at Summer Research in Artificial Intelligence: From Secure to Local LLMs.</p>
+    </div>
+    <div class="aside">May 2024 – Aug 2025</div>
+  </article>
+
+  <article class="job">
+    <div>
+      <h3>IT assistant, student lead</h3>
+      <p class="org">CSU Bakersfield, Information Technology Services</p>
+      <p>Trained and led 20 student technicians and standardized support procedures campus-wide. Resolved 30+ tickets weekly across Windows, macOS, and VoIP for 70+ departments, and administered Active Directory policy across several thousand accounts.</p>
+    </div>
+    <div class="aside">Aug 2021 – Jul 2025</div>
+  </article>
+
+  <article class="job">
+    <div>
+      <h3>Substitute teacher</h3>
+      <p class="org">Kern High School District</p>
+      <p>Taught AP Calculus AB/BC, pre-calculus, and computer science across 19 campuses.</p>
+    </div>
+    <div class="aside">Nov 2025 – present</div>
+  </article>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <h2>Tools</h2>
+  </div>
+  <div class="skills">
+    <div>
+      <h3>Languages</h3>
+      <p>C, C++, C#, CUDA, Python, R, MATLAB, VHDL, MIPS and ARMv8 assembly</p>
+    </div>
+    <div>
+      <h3>Hardware and EDA</h3>
+      <p>KiCad, Altera Quartus, NI Multisim, NI LabVIEW, LiveSPICE</p>
+    </div>
+    <div>
+      <h3>Lab and test</h3>
+      <p>Oscilloscope, digital multimeter, AC/DC supply, soldering and rework</p>
+    </div>
+    <div>
+      <h3>Systems</h3>
+      <p>Active Directory, ServiceNow</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-head">
+    <h2>Get in touch</h2>
+  </div>
+  <p>I'm open to systems, hardware, and GPU-adjacent engineering roles, and to PhD positions in GPU architecture and high-performance computing.</p>
+  <div class="contact-links">
+    <a href="mailto:sebastianregpala@gmail.com">sebastianregpala@gmail.com</a>
+    <a href="https://linkedin.com/in/tom-regpala">LinkedIn</a>
+    <a href="https://github.com/tomregpala">GitHub</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>Tom Regpala</span>
+  <span>Built by hand. No template.</span>
+</footer>
+
+</div>
+
+</body>
+</html>

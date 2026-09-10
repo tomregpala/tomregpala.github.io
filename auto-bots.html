@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUTO-BOTS — Tom Regpala</title>
+<meta name="description" content="Two GPU-side defenses against the Decepticon model-extraction attack, and the security-performance tradeoff between them.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="masthead">
+  <a class="mark" href="index.html">Tom Regpala</a>
+  <nav class="nav" aria-label="Main">
+    <a class="back" href="index.html">← Back</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="project-head">
+  <h1>Hiding a transformer from its own GPU</h1>
+  <p class="byline">Amin Malek, Tom Regpala, John Ramos — California State University, Bakersfield</p>
+  <p class="venue">2025 Summer Research Apprenticeship for Doctoral Programs</p>
+</div>
+
+<div class="prose">
+
+<h2>The attack</h2>
+
+<p>A transformer running on a GPU leaves a trace. Kernels fire in a particular order, with particular durations, touching particular memory addresses — and that pattern is characteristic of the architecture producing it. <strong>Decepticon</strong> (Rafi et al., IISWC 2023) turns that trace into an extraction attack.</p>
+
+<p>The insight it exploits is that fine-tuned models inherit their parent's execution fingerprint. A model fine-tuned from BERT still runs like BERT. So an adversary who can observe kernel timings on shared hardware can identify which pre-trained model sits underneath a proprietary system, then clone it by fine-tuning the same public parent — recovering weights close enough that the original paper reports a 94% match in predictions against a BERT-based victim.</p>
+
+<p>The fingerprint is the vulnerability. Everything below is an attempt to destroy it.</p>
+
+<h2>Two defenses</h2>
+
+<p>We recreated the Decepticon attack as described, then built two countermeasures that manipulate GPU kernel execution to corrupt the signal the attack depends on. They take opposite approaches.</p>
+
+<h3>Constant-load padding</h3>
+<p>Maintain a continuous stream of short, busy workloads alongside the real inference. The genuine kernel executions are still there, but they're buried in manufactured activity, and every model's execution profile is forced toward the same uniform shape. If all fingerprints look alike, none of them identifies anything.</p>
+
+<h3>Jitter scheduling</h3>
+<p>Perturb the kernel schedule directly. Introduce bursts and delays so that the timing graph smears across runs — the same model executed twice produces two different traces. Rather than hiding the fingerprint, this makes it unstable.</p>
+
+<h2>What it cost</h2>
+
+<p>We measured both against the recreated attack on a BERT-base victim, recording median inference latency and how often the attack correctly identified the parent model.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Configuration</th>
+      <th scope="col">Median latency</th>
+      <th scope="col">Overhead</th>
+      <th scope="col">Attack top-1</th>
+      <th scope="col">Attack top-3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Undefended</td>
+      <td>305.79 ms</td>
+      <td>—</td>
+      <td>95.0%</td>
+      <td>100%</td>
+    </tr>
+    <tr>
+      <td>Constant-load</td>
+      <td>2,026.72 ms</td>
+      <td>6.6×</td>
+      <td>9.6%</td>
+      <td>40.3%</td>
+    </tr>
+    <tr>
+      <td>Jitter</td>
+      <td>406.71 ms</td>
+      <td>1.33×</td>
+      <td>61.1%</td>
+      <td>75.0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="caption">Attack top-1 and top-3 are the rates at which Decepticon placed the correct parent model first, or within its first three guesses.</p>
+
+<h2>Reading the result</h2>
+
+<p>Neither defense is a solution, and that's the finding worth stating plainly.</p>
+
+<p>Constant-load padding does what it was built to do — it takes the attack from near-certain identification down to below ten percent, which is worse than guessing among a handful of candidates. But a <strong>6.6× slowdown</strong> is not a cost any production inference service would absorb. It's a demonstration that the fingerprint can be destroyed, not a deployable mitigation.</p>
+
+<p>Jitter is the practical one. A <strong>33% overhead</strong> is within the range a security-conscious deployment might accept, and it cuts identification by a third. But 61% top-1 still means the attacker is right more often than not, and 75% top-3 means they can usually narrow the field to three candidates. That's meaningful leakage.</p>
+
+<div class="callout">
+  <p>The two defenses bracket a design space rather than closing it. The interesting question is what sits between them — whether a defense that adapts its noise to the observed workload can reach constant-load's suppression at something closer to jitter's cost.</p>
+</div>
+
+<p>It's also worth being precise about the threat model. Both defenses assume an adversary observing kernel-level timing on shared hardware. They do nothing about extraction attacks that operate purely on model inputs and outputs, and they don't address the broader question of whether architectural obscurity is worth paying for at all when the parent models are public and few in number.</p>
+
+<h2>Context</h2>
+
+<p>This work grew out of a literature survey of transformer security that I first-authored during the same apprenticeship, which mapped adversarial attacks onto machine-learning pipeline phases and adversary knowledge levels. Writing it is what surfaced the gap: hardware and side-channel defenses were consistently underexplored relative to input-level ones, and almost nobody was quantifying what those defenses cost.</p>
+
+<p>Presented at the CV PATH speed research presentations (Bakersfield College, CSUB, and UC Merced) in September 2025, and as an invited seminar talk at CSUB.</p>
+
+</div>
+
+</main>
+
+<footer>
+  <span><a href="index.html">Tom Regpala</a></span>
+  <span>Built by hand. No template.</span>
+</footer>
+
+</div>
+
+</body>
+</html>
